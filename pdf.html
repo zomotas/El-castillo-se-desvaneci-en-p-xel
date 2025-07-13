@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>sueño de ir de piedra a castillo</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #fff; /* Fondo blanco */
+      overflow: hidden;       /* Elimina scroll externo */
+    }
+
+    iframe {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      transform: scale(0.80); 
+      transform-origin: top left;
+      width: 149.25vw; /* compensación para el scale */
+      height: 149.25vh;
+    }
+  </style>
+</head>
+<body>
+  <iframe src="diario.pdf#toolbar=0&navpanes=0&scrollbar=0"></iframe>
+
+  <script>
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        window.location.href = "diario.html";
+      }
+    });
+  </script>
+</body>
+</html>

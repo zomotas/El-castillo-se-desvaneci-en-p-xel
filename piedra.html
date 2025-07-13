@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PIEDRA </title>
+<style>
+  .floating-tab {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    background: #fff;
+    z-index: 9999;
+  }
+
+  .floating-tab img {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    opacity: 0;
+    animation-name: estrobo;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes estrobo {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    30% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="floating-tab" id="floating-tab">
+</div>
+
+<script>
+  const container = document.getElementById("floating-tab");
+  const totalImages = 70;
+  const delayPerImage = 0.5; // medio segundo por foto
+  const animationDuration = totalImages * delayPerImage;
+
+  for(let i = 1; i <= totalImages; i++) {
+    const img = document.createElement("img");
+    img.src = `img/foto${i}.jpg`;
+    img.alt = `Foto ${i}`;
+    img.style.animationDelay = `${(i - 1) * delayPerImage}s`;
+    img.style.animationDuration = `${animationDuration}s`;
+    container.appendChild(img);
+  }
+
+ 
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        window.location.href = "diario.html";
+      }
+    });
+  </script> 
+</body>
+</html>

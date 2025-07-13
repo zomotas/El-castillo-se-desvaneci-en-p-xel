@@ -1,0 +1,79 @@
+
+/* Estilo general de la página */
+body {
+    font-family: Arial, sans-serif;
+    height:100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(fondo\ inicio.jpg);
+    background-size: cover;
+    margin: 10;
+    color: #ffffff9f;
+}
+
+.contenedor {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(244, 244, 249, 0.336);
+    border-radius: 0px;
+    box-shadow:0 4px 8px rgba(255, 255, 255, 0.1);;
+
+}
+.boton-redireccion1{
+    background-color: #ffffff27;
+    color: rgba(0, 0, 0, 0.355);
+    padding: 10px 20px;
+    display: flow-root;
+    margin-top: 20px;
+    border-radius: 0px;
+    text-decoration: none;
+    font-size: 16px;
+}
+.boton-redireccion1:hover {
+    background-color: #8fc2c7; /*cambio de color al pasar el ratón */
+}
+.boton-redireccion2{
+    background-color: #ffffff27;
+    color: black;
+    padding: 10px 20px;
+    display: flow-root;
+    margin-top: 20px;
+    border-radius: 0px;
+    text-decoration: none;
+    font-size: 16px;
+
+}
+.boton-redireccion2:hover {
+    background-color: #c78fc2; /*cambio de color al pasar el ratón */}
+
+    /* Establecer la disposición de pantalla dividida */
+.split-screen {
+    display: flex;
+    height: 100vh; /* Altura completa de la pantalla */
+}
+
+.left-panel, .right-panel {
+    flex: 1; /* Ambas partes ocuparán el mismo espacio */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estilos para los paneles */
+.left-panel {
+    background-color: #f4f4f4;
+}
+
+.right-panel {
+    background-color: #e0e0e0;
+}
+
+/* Agregar un poco de estilo a los textos */
+h1 {
+    color: #333;
+}
+
+p {
+    font-size: 18px;
+}

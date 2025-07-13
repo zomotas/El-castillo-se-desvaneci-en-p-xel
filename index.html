@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>inicio</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black; 
+    transition: background-color 0.1s linear;
+  }
+
+  .contenedor h2 {
+    color: rgba(255, 255, 255, 0.753);
+    opacity: 0.05;
+  }
+
+  .boton-flotante {
+    position: fixed;
+    right: 80px;          /* a la derecha con margen */
+    top: 60%;             /* un poco más abajo del centro */
+    transform: translateY(-50%); /* centra verticalmente respecto al punto top */
+    background: none;
+    border: none;
+    color: #00000065;
+    font-weight: 100;
+    font-size: 18px;
+    text-decoration: underline;
+    z-index: 1000;
+    pointer-events: auto;
+    opacity: 1;
+    transition: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="contenedor">
+  <h2> el castillo se desvaneció en píxel</h2>
+</div>
+
+<a href="diario.html" class="boton-flotante">aquí en palabra</a>
+
+<script>
+  let startTime = null;
+  const duration = 30000; // 30 segundos
+
+  function easeInOut(t) {
+    return t<0.5
+      ? 2*t*t
+      : -1+(4-2*t)*t;
+  }
+
+  function animarFondo(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+
+    let progress = elapsed / duration;
+    if (progress > 1) progress = 1;
+
+    const easedProgress = easeInOut(progress);
+
+    const colorValue = Math.floor(255 * easedProgress); // de 0 a 255
+    const color = `rgb(${colorValue},${colorValue},${colorValue})`;
+
+    document.body.style.backgroundColor = color;
+
+    if (progress < 1) {
+      requestAnimationFrame(animarFondo);
+    } else {
+      document.body.style.backgroundColor = 'white';
+    }
+  }
+
+  requestAnimationFrame(animarFondo);
+</script>
+
+</body>
+</html>

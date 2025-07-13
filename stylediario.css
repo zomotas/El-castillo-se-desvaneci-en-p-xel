@@ -1,0 +1,54 @@
+/* 🔹 Contenedor principal de los dos paneles */
+.split-screen {
+    display: flex;
+    height: 100vh; /* Ocupar el 100% de la pantalla */
+}
+
+/* 🔹 Panel Izquierdo (Texto) */
+.left-panel {
+    flex: 3; /* Ocupa 3/4 del ancho */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-right: 2px solid #ddd;
+    backdrop-filter: blur(10px);
+    overflow-y: auto;
+    color: #333;
+    height: 100vh;
+}
+/* 🔹 Panel Derecho (Botones) */
+.right-panel {
+    flex: 1; /* Ocupa la otra mitad */
+    background-color: #e0e0e0;
+    padding: 0;
+    overflow-y: auto;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 🔹 Contenedor de los botones */
+.button-panel {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* 🔹 Estilo de los botones */
+.action-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #a46d6d00;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+   color: #8b5e5ea8;
+}

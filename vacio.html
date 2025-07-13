@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VACIO</title>
+  <style>
+    body {
+      background-color: black;
+      color: #ffffffc6;
+      font-family: monospace;
+      padding: 20px;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #terminal {
+      white-space: pre-wrap;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+
+    .input-line {
+      display: inline;
+    }
+
+    #inputField {
+      background: transparent;
+      border: none;
+      color: #00ff00;
+      font-family: monospace;
+      font-size: 1em;
+      outline: none;
+      width: 90%;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+  <div class="input-line">
+    <span>&gt; </span><input type="text" id="inputField" autofocus />
+  </div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+    const input = document.getElementById('inputField');
+
+    const scriptLines = [
+      "Accediendo a memoria compartida...",
+      "Archivo: conversación sin receptor determinado [OK]",
+      "Iniciando protocolo de restauración...",
+      "Desencriptando memoria sensible...",
+      "Esto es la caída al vacío.\n\n(pulsa ENTER para iniciar conversación)",
+      "<<¿Y si todo esto no es suficiente?>>",
+      "<<¿Y si todas estas palabras no contienen nada?>>",
+      "\n¿Podrías decirme tú cuál es la esperanza de esto entonces? ",
+      "Intento adelantarme a tu respuesta e imaginarme tu cara, receptor desconocido. Me agarro a ti, porque a estas alturas me siento sola.",
+      "<<...>>",
+      "<<...>>",
+      "Desde aquí la experiencia es individual. No hay amigxs, no hay imagen ni sonido, aquí ya queda poco. Tú y yo.",
+      "\nAunque no es del todo cierto, ni siquiera somos tú y yo. Esto es una conversación programada. No hay inteligencia ni variantes, si te sientes partícipe simplemente es una ilusión.",
+      "<<Si aún así deseas seguir, pulsa ENTER>>",
+      "Te confieso que esto en realidad es una conversación en soledad. Por más que escribas, esto se quedará aquí y durará tan poco como un gesto. El monstruo se lo tragará.",
+      "<<¿Realmente desear seguir?>> SI/NO",
+      "Yo escribí esto sola, ahora lo comparto contigo, pero no sabré nada de lo que tú compartas conmigo. Este es nuestro trato.",
+      "\nAccediendo pensamientos del 17/06/2025",
+      "Desencriptando recuerdo...",
+      "...",
+      "\nHoy me siento sola, siento que ya nada significa, que el vacío me come y esta pantalla negra donde escribo números y letras, ya no es nada.",
+      "\nLa experiencia de ser querida es lejana, siento estar lejos de todxs, aunque me pase los días teorizando sobre el estar acompañada. No recuerdo los gestos, se me olvida el recuerdo.",
+      "Confío en la praxis pero a veces se diluye y eso realmente me duele.",
+      "...",
+      "\nLas palabras me agotan, siento que el contenido de ellas se ha vuelto disfraz y que no soy más que una impostora.",
+      "\n<<Hoy no soy consciente de mi cuerpo, ni del tuyo. No sé quién eres.>>",
+      "\n¿En qué postura estás leyendo esto? ",
+      "\n<<Vuelvo a imaginarme tu respuesta,\ny respondo con la mía.\n\nAnsío compartir algo, aunque sea imaginar que de alguna manera nuestros cuerpos comparten algo.\n\nEstoy al acecho constante de ser común,\nde ser colectividad,\ngrupo,\nparte de algo que me sostenga.\n\nA veces dudo de si este deseo, es simplemente una fragilidad,\n¿Y si simplemente quiero ser algo compartido,\n¿por qué sola no soy nada?",
+      "\n¿Tú crees que compartimos algo, ahora mismo?",
+      "\nParece absurdo, pero sigo imaginando que esto es entre tú y yo, realmente creo hablar con alguien.\n\nSiento que es como si estuviese en un sueño, en el que imagino a mi amigx pero con otra apariencia difusa, lxs dos sabemos quienes somos pero no nos reconocemos en cuerpo.>>",
+      "<<...>>",
+      "\nCreo que es momento de despedirnos.\nPuedes dejar tu último mensaje.",
+      "\nBorrando Archivo: conversación sin receptor determinado",
+      "Iniciando protocolo de eliminación...",
+      "Gracias por darnos este momento ...",
+      "Adiós.XXX"
+    ];
+
+    let index = 0;
+    let waitingForInput = false;
+
+    function typeLine(text, callback) {
+      let i = 0;
+      const line = document.createElement('div');
+      terminal.appendChild(line);
+      const interval = setInterval(() => {
+        line.textContent += text[i];
+        i++;
+        if (i >= text.length) {
+          clearInterval(interval);
+          callback();
+        }
+        terminal.scrollTop = terminal.scrollHeight;
+      }, 50); // velocidad más lenta
+    }
+
+    function runScript() {
+      if (index >= scriptLines.length) {
+        // Al acabar todo, espera 2 seg y redirige
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 2000);
+        return;
+      }
+
+      const line = scriptLines[index];
+
+      // En la línea que debe esperar respuesta no seguimos hasta que el usuario escriba/pulse enter
+      if (
+        line.includes(' esto entonces') ||
+        line.includes(' y yo') ||
+        line.includes('pulsa ENTER') ||
+        line.includes('SI/NO') ||
+        line.includes('leyendo esto') ||
+         line.includes('mismo?') ||
+        line.includes('último mensaje')
+      ) {
+        waitingForInput = true;
+        typeLine(line, () => input.focus());
+      } else {
+        typeLine(line, () => {
+          index++;
+          runScript();
+        });
+      }
+    }
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && waitingForInput) {
+        const value = input.value.trim();
+        terminal.innerHTML += `\n> ${value}\n`;
+        input.value = '';
+
+        // Control de SI/NO para redirigir a index.html si NO
+        if (scriptLines[index].includes('SI/NO')) {
+          if (value.toUpperCase() === 'NO') {
+            window.location.href = 'index.html';
+            return;
+          }
+        }
+
+        index++;
+        waitingForInput = false;
+        runScript();
+      }
+    });
+
+    runScript();
+  </script>
+</body>
+</html>
